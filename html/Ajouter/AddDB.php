@@ -30,10 +30,10 @@ function addalliance($conn) {
     $name = mysqli_escape_string($conn, $_POST['name']);
     $link = mysqli_escape_string($conn, $_POST['link']);
     $corporation = mysqli_escape_string($conn, $_POST['corporation']);
-    $pdg = mysqli_escape_string($conn, $_POST['pdg']);
+    //$pdg = mysqli_escape_string($conn, $_POST['pdg']);
 
-    $sql = "INSERT INTO alliance (namealliance, linkalliance, corpoalliance, PDG)
-    VALUES ('" . $name ."', '" . $link . "', '" . $corporation ."', '" . $pdg . "')";
+    $sql = "INSERT INTO alliance (namealliance, linkalliance, corpoalliance/*, PDG*/)
+    VALUES ('" . $name ."', '" . $link . "', '" . $corporation ."'/*, " . $ pdg . "*/)";
 
     if ($conn->query($sql) != TRUE) {
         echo "Error: " . $sql . "<br>" . $conn->error;

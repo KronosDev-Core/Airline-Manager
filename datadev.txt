@@ -1,0 +1,143 @@
+    <div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Joueur</span>
+            </div>
+            <input id="name" type="text" class="form-control" placeholder="Username" required>
+            <input id="year" type="number" class="form-control" placeholder="Age" required>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Link Profil</span>
+            </div>
+            <input id="link" type="url" class="form-control" placeholder="Link" required>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Alliance</span>
+            </div>
+            <select id="alliance" class="form-control" id="listAlliance"></select>
+            <select id="role" class="form-control" id="listRole"></select>
+        </div>
+
+        <div id="dquestion" class="input-group-inline mb-3">
+            <input id="absence" type="text" class="form-control" placeholder="Absence(s) programmés ?" required>
+            <br>
+            <textarea id="motivation" rows="10" class="form-control" placeholder="Motivation ?" required></textarea>
+            <br>
+            <input id="tuvous" type="text" class="form-control" placeholder="Tu / vous ?" required>
+            <br>
+            <input id="trouve" type="text" class="form-control" placeholder="comment nous a tu trouvé ?" required>
+            <br>
+            <select id="gender" class="form-control" id="Gender" required>
+            <option value="Homme">Homme</option>
+            <option value="Femme">Femme</option>
+        </select>
+            <br>
+            <input id="interconnect" type="text" class="form-control" placeholder="Intervalle de connections ?" required>
+            <br>
+            <textarea id="other" rows="10" class="form-control" placeholder="ok as tu des choses a rajouté qui te semble pertinent ?" required></textarea>
+            <br>
+        </div>
+        <button id="btnSubmit" class="btn btn-dark btn-block">Enregistrer</button>
+    </div>
+
+    <script>
+        $('#btnSubmit').click(() => {
+            var name = $('#name').val();
+            var year = $('#year').val();
+            var link = $('#link').val();
+            var alliance = $('#alliance').val();
+            var role = $('#role').val();
+            var absence = $('#absence').val();
+            var motivation = $('#motivation').val();
+            var tuvous = $('#tuvous').val();
+            var trouve = $('#trouve').val();
+            var gender = $('#gender').val();
+            var interconnect = $('#interconnect').val();
+            var other = $('#other').val();
+
+            console.log(name, year, link, alliance, role, absence, motivation, tuvous, trouve, gender, interconnect, other);
+        });
+    </script>
+
+
+
+
+
+
+
+<form action="./home.php" method="GET">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Joueur</span>
+        </div>
+        <input name="name" type="text" class="form-control" placeholder="Username" required>
+        <input name="year" type="number" class="form-control" placeholder="Age">
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Link Profil</span>
+        </div>
+        <input name="link" type="url" class="form-control" placeholder="Link" required>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Alliance</span>
+        </div>
+        <select name="alliance" class="form-control" id="listAlliance"></select>
+        <select name="role" class="form-control" id="listRole"></select>
+    </div>
+
+    <div id="dquestion" class="input-group-inline mb-3">
+        <textarea name="candidature" rows="10" class="form-control" placeholder="Candidature"></textarea>
+        <br>
+        <textarea name="entretien" rows="10" class="form-control" placeholder="entretien"></textarea>
+        <br>
+    </div>
+    <button type="submit" class="btn btn-dark btn-block" value="submit">Enregistrer</button>
+</form>
+
+
+
+
+
+
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        $username = 'Program';
+        $servername = "localhost";
+        $password = "HelloWords42";
+        $port = 27017;
+
+        $conn = new mysqli($servername, $username, $password, '', $port);
+        $db   = mysqli_select_db($conn, "rh");
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        };
+
+        if (!$conn->set_charset('utf8')) {
+            printf("Erreur lors du chargement du jeu de caractères utf8 : %s\n", $mysqli->error);
+        };
+
+        $name = mysqli_escape_string($conn, $_GET['name']);
+        $link = mysqli_escape_string($conn, $_GET['link']);
+        $candidature = mysqli_escape_string($conn, $_GET['candidature']);
+        $entretien = mysqli_escape_string($conn, $_GET['entretien']);
+    
+        $sql = "INSERT INTO rh.player (nameplayer, linkplayer, entretienplayer, candidatureplayer, allianceplayer, roleplayer)
+        VALUES ('" . $name ."', '" . $link . "', '" . $entretien ."', '" . $candidature . "')";
+
+        if ($conn->query($sql) != TRUE) {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        } else { echo 'Success'; };
+    };
+
+    $conn->close();
+    
+    ?>

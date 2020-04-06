@@ -156,7 +156,6 @@ if ($conn->connect_error) {
             }
         });
     </script>
-
 </body>
 
 </html>

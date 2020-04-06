@@ -18,7 +18,7 @@ $(document).ready(function() {
                 url: "./Tab.php",
                 dataType: "html",
                 success: function(response) {
-                    $('div#Tab').html(response);
+                    $('div#Tab li').html(response);
                 }
             });
         };
@@ -29,7 +29,7 @@ $(document).ready(function() {
                 url: "./Tab.php",
                 dataType: "html",
                 success: function(response) {
-                    $('div#Tab').html(response);
+                    $('div#Tab li').html(response);
                 }
             });
 
@@ -318,64 +318,31 @@ $(document).ready(function() {
         });
     });
 
+    // Action Click Button Tabs
+
     $('div#TopTab button').click(function(e) {
-        console.log("click", e.target.previousElementSibling.id);
+        console.log(e.target.previousElementSibling.id);
     });
 
     $('div#Tab button').click(function(e) {
         console.log(e.target.previousElementSibling.id);
     });
 
-    $("button#navbarAddTopTab, button#navbarAddTab").click(function(r) {
-        var PreviousId = r.target.previousElementSibling.id;
+    // ADD TABS
 
-        if (PreviousId === 'TopTab') {
-            $("div#HomeModalTopTab").modal();
-        }
+    $("button#navbarAddTopTab").click(function(r) {
 
-        if (PreviousId === 'Tab') {
-            $("div#HomeModalTab").modal();
-        }
-        // id:SaveAddTopTab
+        $("#HomeModalTopTab").modal();
 
-        $("#SaveAddTopTab, #SaveAddTab").click(function(e) {
+        $("#SaveAddTopTab").click(function(e) {
             var dataTT = $('div#HomeModalTopTab input#data').val();
-            var dataT = $('div#HomeModalTab input#data').val();
             var idTT = $('div#HomeModalTopTab input#id').val();
-            var idT = $('div#HomeModalTab input#id').val();
-
-            if (dataT != "" || null || undefined && idT != "" || null || undefined) {
-                //Tab
-                PreviousId = r.target.previousElementSibling.id;
-                var url = './AddDB.php';
-
-                console.log(PreviousId, dataT, idT);
-
-                $.post(url, { where: PreviousId, data: dataT, id: idT, type: "Tab" },
-                    function(data, textStatus, jqXHR) {
-                        //alert("Data: " + data + "\nStatus: " + status + "\nXHR: " + jqXHR);
-
-                        if (data == 'Success') {
-                            refresh('Tab');
-                        }
-                    },
-                );
-
-                var dataTT = $('div#HomeModalTopTab input#data').val(null);
-                var dataT = $('div#HomeModalTab input#data').val(null);
-                var idTT = $('div#HomeModalTopTab input#id').val(null);
-                var idT = $('div#HomeModalTab input#id').val(null);
-                PreviousId = null;
-            };
 
             if (dataTT != "" || null || undefined && idTT != "" || null || undefined) {
                 // TopTab
-                PreviousId = r.target.previousElementSibling.id;
                 var url = './AddDB.php';
 
-                console.log(PreviousId, dataTT, idTT);
-
-                $.post(url, { where: PreviousId, data: dataTT, id: idTT, type: "TopTab" },
+                $.post(url, { where: 'TopTab', data: dataTT, id: idTT, type: "TopTab" },
                     function(data, textStatus, jqXHR) {
                         //alert("Data: " + data + "\nStatus: " + status + "\nXHR: " + jqXHR);
                         if (data == 'Success') {
@@ -385,34 +352,64 @@ $(document).ready(function() {
                 );
 
                 var dataTT = $('div#HomeModalTopTab input#data').val(null);
-                var dataT = $('div#HomeModalTab input#data').val(null);
                 var idTT = $('div#HomeModalTopTab input#id').val(null);
-                var idT = $('div#HomeModalTab input#id').val(null);
-                PreviousId = null;
             }
         });
-
-        /*
-                var nameA = $("input#namealliance").val();
-                var linkA = $("input#linkalliance").val();
-                var corporationA = $("#listCorporation").val();
-                var pdgA = $("#listPlayerpdg").val();
-
-                var url = "./AddDB.php";
-                if (nameA != "" || null && linkA != "" || null && corporationA != "" || null && pdgA != "" || null) {
-                    console.log('is not null');
-                    $.post(url, { name: nameA, link: linkA, corporation: corporationA, pdg: pdgA, type: "alliance" },
-                        function(data, textStatus, jqXHR) {
-                            alert("Data: " + data + "\nStatus: " + status + "\nXHR: " + jqXHR);
-                        },
-                    );
-                    $("input#namealliance").val(null);
-                    $("input#linkalliance").val(null);
-                    $("#listCorporation").val(null);
-                    $("#listPlayerpdg").val(null);
-                } else {
-                    console.log('is null');
-                }
-        */
     });
+
+    $('button#navbarAddTab').click(function(e) {
+        $("#HomeModalTab").modal();
+
+        $("#SaveAddTab").click(function(e) {
+            var dataT = $('div#HomeModalTab input#data').val();
+            var idT = $('div#HomeModalTab input#id').val();
+
+            if (dataT != "" || null || undefined && idT != "" || null || undefined) {
+                //Tab
+                var url = './AddDB.php';
+
+                $.post(url, { where: 'Tab', data: dataT, id: idT, type: "Tab" },
+                    function(data, textStatus, jqXHR) {
+                        //alert("Data: " + data + "\nStatus: " + status + "\nXHR: " + jqXHR);
+
+                        if (data == 'Success') {
+                            refresh('Tab');
+                        }
+                    },
+                );
+                var dataT = $('div#HomeModalTab input#data').val(null);
+                var idT = $('div#HomeModalTab input#id').val(null);
+            };
+        });
+    });
+
+    // DEL TABS
+
+    $("button['' = '']").click(function(e) {
+        e.preventDefault();
+
+    });
+
+    /*
+            var nameA = $("input#namealliance").val();
+            var linkA = $("input#linkalliance").val();
+            var corporationA = $("#listCorporation").val();
+            var pdgA = $("#listPlayerpdg").val();
+
+            var url = "./AddDB.php";
+            if (nameA != "" || null && linkA != "" || null && corporationA != "" || null && pdgA != "" || null) {
+                console.log('is not null');
+                $.post(url, { name: nameA, link: linkA, corporation: corporationA, pdg: pdgA, type: "alliance" },
+                    function(data, textStatus, jqXHR) {
+                        alert("Data: " + data + "\nStatus: " + status + "\nXHR: " + jqXHR);
+                    },
+                );
+                $("input#namealliance").val(null);
+                $("input#linkalliance").val(null);
+                $("#listCorporation").val(null);
+                $("#listPlayerpdg").val(null);
+            } else {
+                console.log('is null');
+            }
+    */
 });

@@ -18,8 +18,7 @@ $dataTT = mysqli_query($conn, $sqlTT);
 
 while($rowTT = mysqli_fetch_array($dataTT)) {
     echo '
-    <button type="button" class="btn btn-outline-dark" id="' . $rowTT['idelementview'] . '">' . $rowTT['dataview'] . ' <button type="button" onclick="deltabs(event)" class="btn btn-outline-danger data-func="Del" text-danger" id="' . $rowTT['idelementview'] . 'Del">&times;</button></button>
+    <button type="button" class="btn btn-outline-dark" id="' . $rowTT['idelementview'] . '">' . $rowTT['dataview'] . ' </button>
     ';
 };
 ?>
-<script src="./main.js"></script>

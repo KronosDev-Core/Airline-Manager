@@ -37,9 +37,10 @@ if ($conn->connect_error) {
         </a>
 
         <ul class="navbar-nav nav d-inline-flex" aria-expanded="false">
-            <li class="nav-items dropdown d-flex">
+            <li id="listTopTap" class="nav-items dropdown d-flex">
                 <div id="TopTab"></div>
                 <button type="button" class="btn btn-outline-success text-success" id="navbarAddTopTab">+</button>
+                <button type="button" class="Del btn btn-outline-danger text-danger" id="navbarDelTopTab">-</button>
             </li>
         </ul>
     </nav>
@@ -50,6 +51,7 @@ if ($conn->connect_error) {
                 <li class="nav-item d-flex"></li>
             </div>
             <button type="button" class="btn btn-outline-success text-success" id="navbarAddTab">+</button>
+            <button type="button" class="btn btn-outline-success text-danger" id="navbarDelTab">-</button>
         </ul>
 
         <div class="tab-content">
@@ -64,31 +66,16 @@ if ($conn->connect_error) {
         <div class="modal-content">
 
             <div class="modal-header">
-                <h4 class="modal-title">Create new TopTab</h4>
+                <h4 id="modal-titleTopTab" class="modal-title">...</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
-            <div class="modal-body">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">data *</span>
-                    </div>
-                    <input id="data" name="data" type="text" class="form-control" placeholder="data TopTab">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">ID</span>
-                    </div>
-                    <input id="id" name="id" type="text" class="form-control" placeholder="id TopTab">
-                </div>
-                <p>* Require</p>
+            <div id="modal-bodyTopTab" class="modal-body">
+
             </div>
 
-            <div class="modal-footer">
-                <div class="btn-group btn-block">
-                    <button class="btn btn-success" id="SaveAddTopTab">Save</button>
-                    <button class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
+            <div id="modal-footerTopTab" class="modal-footer">
+
             </div>
 
         </div>

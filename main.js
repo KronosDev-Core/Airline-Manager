@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    var i = true;
 
     function refresh(data) {
         if (data == 'TopTab') {
@@ -44,7 +45,10 @@ $(document).ready(function() {
         };
     };
 
-    refresh('all');
+    if (i) {
+        refresh('all');
+        i = false;
+    };
 
     function tabscontrol(data) {
         $('.nav-item').on('shown.bs.tab', function(e) {
@@ -332,6 +336,28 @@ $(document).ready(function() {
 
     $("button#navbarAddTopTab").click(function(r) {
 
+        $('#modal-titleTopTab').html('Create new TopTab');
+        $('#modal-bodyTopTab').html(`
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">data *</span>
+            </div>
+            <input id="data" name="data" type="text" class="form-control" placeholder="data TopTab">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">ID</span>
+            </div>
+            <input id="id" name="id" type="text" class="form-control" placeholder="id TopTab">
+        </div>
+        <p>* Require</p>
+        `);
+        $('#modal-footerTopTab').html(`
+        <div class="btn-group btn-block">
+            <button class="btn btn-success" id="SaveAddTopTab">Save</button>
+            <button class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        `);
         $("#HomeModalTopTab").modal();
 
         $("#SaveAddTopTab").click(function(e) {
@@ -385,12 +411,33 @@ $(document).ready(function() {
 
     // DEL TABS
 
+    $('button#navbarDelTopTab').click(function(r) {
+        console.log(r);
+
+        $('#modal-titleTopTab').html('Delete TopTab');
+        $.ajax({
+            type: "GET",
+            url: "./ListDB.php",
+            data: { type: "TopTab" },
+            dataType: "html",
+            success: function(response) {
+                console.log(response);
+                $('#modal-bodyTopTab').html(response);
+            }
+        });
+        $("#HomeModalTopTab").modal();
+    });
+
+    $('button#navbarDelTab').click(function(e) {
+        console.log(e);
+    });
+
+    /*
     $("button['' = '']").click(function(e) {
         e.preventDefault();
 
     });
 
-    /*
             var nameA = $("input#namealliance").val();
             var linkA = $("input#linkalliance").val();
             var corporationA = $("#listCorporation").val();

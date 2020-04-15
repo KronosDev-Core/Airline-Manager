@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    var i = true;
 
     function refresh(data) {
         if (data == 'TopTab') {
@@ -19,7 +18,7 @@ $(document).ready(function() {
                 url: "./Tab.php",
                 dataType: "html",
                 success: function(response) {
-                    $('div#Tab li').html(response);
+                    $('div#Tab').html(response);
                 }
             });
         };
@@ -30,7 +29,7 @@ $(document).ready(function() {
                 url: "./Tab.php",
                 dataType: "html",
                 success: function(response) {
-                    $('div#Tab li').html(response);
+                    $('div#Tab').html(response);
                 }
             });
 
@@ -384,6 +383,28 @@ $(document).ready(function() {
     });
 
     $('button#navbarAddTab').click(function(e) {
+        $('#modal-titleTab').html('Create new Tab');
+        $('#modal-bodyTab').html(`
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">data *</span>
+            </div>
+            <input id="data" name="data" type="text" class="form-control" placeholder="data Tab">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">ID</span>
+            </div>
+            <input id="id" name="id" type="text" class="form-control" placeholder="id Tab">
+        </div>
+        <p>* Require</p>
+        `);
+        $('#modal-footerTab').html(`
+        <div class="btn-group btn-block">
+            <button class="btn btn-success" id="SaveAddTab">Save</button>
+            <button class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        `);
         $("#HomeModalTab").modal();
 
         $("#SaveAddTab").click(function(e) {
@@ -411,24 +432,43 @@ $(document).ready(function() {
 
     // DEL TABS
 
-    $('button#navbarDelTopTab').click(function(r) {
-        console.log(r);
-
+    $('#navbarDelTopTab').click(function(r) {
         $('#modal-titleTopTab').html('Delete TopTab');
         $.ajax({
             type: "GET",
             url: "./ListDB.php",
             data: { type: "TopTab" },
-            dataType: "html",
             success: function(response) {
-                console.log(response);
                 $('#modal-bodyTopTab').html(response);
             }
         });
+        $('#modal-footerTopTab').html(`
+        <div class="btn-group btn-block">
+            <button class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        `);
         $("#HomeModalTopTab").modal();
     });
 
-    $('button#navbarDelTab').click(function(e) {
+    $('#navbarDelTab').click(function(e) {
+        $('#modal-titleTab').html('Delete Tab');
+        $.ajax({
+            type: "GET",
+            url: "./ListDB.php",
+            data: { type: "Tab" },
+            success: function(response) {
+                $('#modal-bodyTab').html(response);
+            }
+        });
+        $('#modal-footerTab').html(`
+        <div class="btn-group btn-block">
+            <button class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        `);
+        $("#HomeModalTab").modal();
+    });
+
+    $('#listviewTopTabDel').click(function(e) {
         console.log(e);
     });
 

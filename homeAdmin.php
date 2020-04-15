@@ -17,6 +17,7 @@
 <body>
 
 <?php 
+require 'maindb.php';
 
 $username = 'Program';
 $servername = "localhost";
@@ -46,12 +47,12 @@ if ($conn->connect_error) {
     </nav>
 
     <div id="Dbody">
-        <ul class="nav nav-tabs bg-dark text-grey" id="navTab">
-            <div id="Tab" class="d-flex">
-                <li class="nav-item d-flex"></li>
-            </div>
-            <button type="button" class="btn btn-outline-success text-success" id="navbarAddTab">+</button>
-            <button type="button" class="btn btn-outline-success text-danger" id="navbarDelTab">-</button>
+        <ul class="nav-tabs nav bg-dark text-grey" id="navTab" aria-expanded="false">
+            <li id="listTap" class="nav-items dropdown d-flex">
+                <div id="Tab" class="d-flex"></div>
+                <button type="button" class="btn btn-outline-success text-success" id="navbarAddTab">+</button>
+                <button type="button" class="btn btn-outline-success text-danger" id="navbarDelTab">-</button>
+            </li>
         </ul>
 
         <div class="tab-content">
@@ -61,66 +62,53 @@ if ($conn->connect_error) {
         </div>
     </div>
 
-<div class="modal fade" id="HomeModalTopTab">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    <div class="modal fade" id="HomeModalTopTab">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-            <div class="modal-header">
-                <h4 id="modal-titleTopTab" class="modal-title">...</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="modal-header">
+                    <h4 id="modal-titleTopTab" class="modal-title">...</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div id="modal-bodyTopTab" class="modal-body">
+
+                </div>
+
+                <div id="modal-footerTopTab" class="modal-footer">
+
+                </div>
+
             </div>
-
-            <div id="modal-bodyTopTab" class="modal-body">
-
-            </div>
-
-            <div id="modal-footerTopTab" class="modal-footer">
-
-            </div>
-
         </div>
     </div>
-</div>
 
-<div class="modal fade" id="HomeModalTab">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    <div class="modal fade" id="HomeModalTab">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-            <div class="modal-header">
-                <h4 class="modal-title">Create new Tab</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <div class="modal-body">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">data *</span>
-                    </div>
-                    <input id="data" name="data" type="text" class="form-control" placeholder="data Tab">
+                <div class="modal-header">
+                    <h4 id="modal-titleTab" class="modal-title">...</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">ID</span>
-                    </div>
-                    <input id="id" name="id" type="text" class="form-control" placeholder="id Tab">
-                </div>
-                <p>* Require</p>
-            </div>
 
-            <div class="modal-footer">
-                <div class="btn-group btn-block">
-                    <button class="btn btn-success" id="SaveAddTab">Save</button>
-                    <button class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
-            </div>
+                <div id="modal-bodyTab" class="modal-body">
 
+                </div>
+
+                <div id="modal-footerTab" class="modal-footer">
+
+                </div>
+
+            </div>
         </div>
     </div>
+
 </div>
 
+    <script type='text/javascript' >
+        var i = true;
 
-    <script src="main.js"></script>
-    <script>
         $.ajax({
             type: "GET",
             url: "./html/Ajouter/Joueur.php",
@@ -143,6 +131,7 @@ if ($conn->connect_error) {
             }
         });
     </script>
+    <script type='text/javascript' src="main.js"></script>
 </body>
 
 </html>

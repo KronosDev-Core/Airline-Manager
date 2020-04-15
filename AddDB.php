@@ -1,16 +1,6 @@
 <?php 
 
-$username = 'Program';
-$servername = "localhost";
-$password = "HelloWords42";
-$port = 27017;
-
-$conn = new mysqli($servername, $username, $password, '', $port);
-$db   = mysqli_select_db($conn, "rh");
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-};
+require 'maindb.php';
 
 function addplayer($conn) {
     $name = mysqli_escape_string($conn, $_POST['name']);
@@ -18,7 +8,7 @@ function addplayer($conn) {
     $candidature = mysqli_escape_string($conn, $_POST['candidature']);
     $entretien = mysqli_escape_string($conn, $_POST['entretien']);
 
-    $sql = "INSERT INTO player (nameplayer, linkplayer, entretienplayer, candidatureplayer)
+    $sql = "INSERT INTO rh.player (nameplayer, linkplayer, entretienplayer, candidatureplayer)
     VALUES ('" . $name ."', '" . $link . "', '" . $entretien ."', '" . $candidature . "')";
 
     if ($conn->query($sql) != TRUE) {
@@ -32,7 +22,7 @@ function addalliance($conn) {
     $corporation = mysqli_escape_string($conn, $_POST['corporation']);
     //$pdg = mysqli_escape_string($conn, $_POST['pdg']); -> add $sql pdg data
 
-    $sql = "INSERT INTO alliance (namealliance, linkalliance, corpoalliance)
+    $sql = "INSERT INTO rh.alliance (namealliance, linkalliance, corpoalliance)
     VALUES ('" . $name ."', '" . $link . "', '" . $corporation ."')";
 
     if ($conn->query($sql) != TRUE) {

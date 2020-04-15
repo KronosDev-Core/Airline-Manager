@@ -22,3 +22,4 @@ while($rowT = mysqli_fetch_array($dataT)) {
 }
 
 ?>
+<script type='text/javascript' src="main.js"></script>

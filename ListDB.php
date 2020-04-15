@@ -9,8 +9,8 @@ function listTopTab($conn) {
 
     while($row = mysqli_fetch_array($data)) {
         array_push($rdata, '
-        <div class="btn-group btn-block">
-            <button type="button" class="Del btn btn-outline-danger text-danger" id="listviewTopTabDel">-</button>
+        <div id="' . $row['idview'] . '" value="TopTab" class="btn-group btn-block">
+            <button value="' . $row['idview'] . '" type="button" class="Del btn btn-outline-danger text-danger" id="listviewAllTabDel">-</button>
             <button id="listviewTopTab" value="' . $row['idview'] . '" class="list-group-item list-group-item-action">' . $row['dataview'] . '</button>
         </div>
         ');
@@ -26,8 +26,8 @@ function listTab($conn) {
 
     while($row = mysqli_fetch_array($data)) {
         array_push($rdata, '
-        <div class="btn-group btn-block">
-            <button type="button" class="Del btn btn-outline-danger text-danger" id="listviewTopTabDel">-</button>
+        <div id="' . $row['idview'] . '" value="Tab" class="btn-group btn-block">
+            <button value="' . $row['idview'] . '" type="button" class="Del btn btn-outline-danger text-danger" id="listviewAllTabDel">-</button>
             <button id="listviewTopTab" value="' . $row['idview'] . '" class="list-group-item list-group-item-action">' . $row['dataview'] . '</button>
         </div>
         ');

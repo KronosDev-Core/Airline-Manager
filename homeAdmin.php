@@ -62,52 +62,13 @@ if ($conn->connect_error) {
         </div>
     </div>
 
-    <div class="modal fade" id="HomeModalTopTab">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h4 id="modal-titleTopTab" class="modal-title">...</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <div id="modal-bodyTopTab" class="modal-body">
-
-                </div>
-
-                <div id="modal-footerTopTab" class="modal-footer">
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="HomeModalTab">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h4 id="modal-titleTab" class="modal-title">...</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <div id="modal-bodyTab" class="modal-body">
-
-                </div>
-
-                <div id="modal-footerTab" class="modal-footer">
-
-                </div>
-
-            </div>
-        </div>
-    </div>
+    <div class="modal fade" id="HomeModal"></div>
 
 </div>
 
     <script type='text/javascript' >
-        var i = true;
+        let i = true;
+        var c = 0;
 
         $.ajax({
             type: "GET",
@@ -131,7 +92,9 @@ if ($conn->connect_error) {
             }
         });
     </script>
-    <script type='text/javascript' src="main.js"></script>
+    <div id="scriptreload">
+        <script type='text/javascript' src="main.js"></script>
+    </div>
 </body>
 
 </html>

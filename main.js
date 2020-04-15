@@ -8,6 +8,7 @@ $(document).ready(function() {
                 dataType: "html",
                 success: function(response) {
                     $('div#TopTab').html(response);
+                    $('#scriptreload').html(`<script type='text/javascript' src="main.js"></script>`);
                 }
             });
         };
@@ -19,6 +20,7 @@ $(document).ready(function() {
                 dataType: "html",
                 success: function(response) {
                     $('div#Tab').html(response);
+                    $('#scriptreload').html(`<script type='text/javascript' src="main.js"></script>`);
                 }
             });
         };
@@ -30,6 +32,7 @@ $(document).ready(function() {
                 dataType: "html",
                 success: function(response) {
                     $('div#Tab').html(response);
+                    $('#scriptreload').html(`<script type='text/javascript' src="main.js"></script>`);
                 }
             });
 
@@ -39,6 +42,7 @@ $(document).ready(function() {
                 dataType: "html",
                 success: function(response) {
                     $('div#TopTab').html(response);
+                    $('#scriptreload').html(`<script type='text/javascript' src="main.js"></script>`);
                 }
             });
         };
@@ -333,10 +337,10 @@ $(document).ready(function() {
 
     // ADD TABS
 
-    $("button#navbarAddTopTab").click(function(r) {
+    $("button#navbarAddTopTab").click(async function(r) {
 
-        $('#modal-titleTopTab').html('Create new TopTab');
-        $('#modal-bodyTopTab').html(`
+        var title = 'Create new TopTab';
+        var body = `
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">data *</span>
@@ -350,41 +354,49 @@ $(document).ready(function() {
             <input id="id" name="id" type="text" class="form-control" placeholder="id TopTab">
         </div>
         <p>* Require</p>
-        `);
-        $('#modal-footerTopTab').html(`
+        `;
+        var footer = `
         <div class="btn-group btn-block">
             <button class="btn btn-success" id="SaveAddTopTab">Save</button>
             <button class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-        `);
-        $("#HomeModalTopTab").modal();
+        </div>`;
 
-        $("#SaveAddTopTab").click(function(e) {
-            var dataTT = $('div#HomeModalTopTab input#data').val();
-            var idTT = $('div#HomeModalTopTab input#id').val();
-
-            if (dataTT != "" || null || undefined && idTT != "" || null || undefined) {
-                // TopTab
-                var url = './AddDB.php';
-
-                $.post(url, { where: 'TopTab', data: dataTT, id: idTT, type: "TopTab" },
-                    function(data, textStatus, jqXHR) {
-                        //alert("Data: " + data + "\nStatus: " + status + "\nXHR: " + jqXHR);
-                        if (data == 'Success') {
-                            refresh('TopTab');
-                        }
-                    },
-                );
-
-                var dataTT = $('div#HomeModalTopTab input#data').val(null);
-                var idTT = $('div#HomeModalTopTab input#id').val(null);
+        await $.post("./modal.php", { title: title, body: body, footer: footer },
+            function(data, textStatus, jqXHR) {
+                $('#HomeModal').html(data);
+                $("#HomeModal").modal();
+                $('#scriptreload').html(`<script type='text/javascript' src="main.js"></script>`);
             }
-        });
+        );
+
     });
 
-    $('button#navbarAddTab').click(function(e) {
-        $('#modal-titleTab').html('Create new Tab');
-        $('#modal-bodyTab').html(`
+    $("#SaveAddTopTab").click(function(e) {
+        var dataTT = $('div#HomeModal input#data').val();
+        var idTT = $('div#HomeModal input#id').val();
+
+        if (dataTT != "" || null || undefined && idTT != "" || null || undefined) {
+            // TopTab
+            var url = './AddDB.php';
+
+            $.post(url, { where: 'TopTab', data: dataTT, id: idTT, type: "TopTab" },
+                function(data, textStatus, jqXHR) {
+                    //alert("Data: " + data + "\nStatus: " + status + "\nXHR: " + jqXHR);
+                    if (data == 'Success') {
+                        refresh('TopTab');
+                    }
+                },
+            );
+
+            var dataTT = $('div#HomeModal input#data').val(null);
+            var idTT = $('div#HomeModal input#id').val(null);
+        }
+    });
+
+    $('button#navbarAddTab').click(async function(e) {
+
+        var title = 'Create new Tab';
+        var body = `
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">data *</span>
@@ -398,78 +410,136 @@ $(document).ready(function() {
             <input id="id" name="id" type="text" class="form-control" placeholder="id Tab">
         </div>
         <p>* Require</p>
-        `);
-        $('#modal-footerTab').html(`
+        `;
+        var footer = `
         <div class="btn-group btn-block">
             <button class="btn btn-success" id="SaveAddTab">Save</button>
             <button class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-        `);
-        $("#HomeModalTab").modal();
+        </div>`;
 
-        $("#SaveAddTab").click(function(e) {
-            var dataT = $('div#HomeModalTab input#data').val();
-            var idT = $('div#HomeModalTab input#id').val();
+        await $.post("./modal.php", { title: title, body: body, footer: footer },
+            function(data, textStatus, jqXHR) {
+                $('#HomeModal').html(data);
+                $("#HomeModal").modal();
+                $('#scriptreload').html(`<script type='text/javascript' src="main.js"></script>`);
+            }
+        );
 
-            if (dataT != "" || null || undefined && idT != "" || null || undefined) {
-                //Tab
-                var url = './AddDB.php';
+    });
 
-                $.post(url, { where: 'Tab', data: dataT, id: idT, type: "Tab" },
-                    function(data, textStatus, jqXHR) {
-                        //alert("Data: " + data + "\nStatus: " + status + "\nXHR: " + jqXHR);
+    $("#SaveAddTab").click(function(e) {
+        var dataT = $('div#HomeModal input#data').val();
+        var idT = $('div#HomeModal input#id').val();
 
-                        if (data == 'Success') {
-                            refresh('Tab');
-                        }
-                    },
-                );
-                var dataT = $('div#HomeModalTab input#data').val(null);
-                var idT = $('div#HomeModalTab input#id').val(null);
-            };
-        });
+        if (dataT != "" || null || undefined && idT != "" || null || undefined) {
+            //Tab
+            var url = './AddDB.php';
+
+            $.post(url, { where: 'Tab', data: dataT, id: idT, type: "Tab" },
+                function(data, textStatus, jqXHR) {
+                    //alert("Data: " + data + "\nStatus: " + status + "\nXHR: " + jqXHR);
+
+                    if (data == 'Success') {
+                        refresh('Tab');
+                    }
+                },
+            );
+            var dataT = $('div#HomeModal input#data').val(null);
+            var idT = $('div#HomeModal input#id').val(null);
+        };
     });
 
     // DEL TABS
 
-    $('#navbarDelTopTab').click(function(r) {
-        $('#modal-titleTopTab').html('Delete TopTab');
-        $.ajax({
-            type: "GET",
-            url: "./ListDB.php",
-            data: { type: "TopTab" },
-            success: function(response) {
-                $('#modal-bodyTopTab').html(response);
-            }
-        });
-        $('#modal-footerTopTab').html(`
+    $('#navbarDelTopTab').click(async function(r) {
+
+        var title = 'Delete TopTap';
+        var body = null;
+        var footer = `
         <div class="btn-group btn-block">
             <button class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-        `);
-        $("#HomeModalTopTab").modal();
+        </div>`;
+
+        if (c === 4) {
+            await $.ajax({
+                type: "GET",
+                url: "./ListDB.php",
+                data: { type: "TopTab" },
+                success: function(response) {
+                    body = response;
+                }
+            });
+
+            await $.post("./modal.php", { title: title, body: body, footer: footer },
+                function(data, textStatus, jqXHR) {
+                    $('#HomeModal').html(data);
+                    $("#HomeModal").modal();
+                    $('#scriptreload').html(`<script type='text/javascript' src="main.js"></script>`);
+                }
+            );
+            c = 0;
+        } else {
+            c++;
+        };
     });
 
-    $('#navbarDelTab').click(function(e) {
-        $('#modal-titleTab').html('Delete Tab');
-        $.ajax({
-            type: "GET",
-            url: "./ListDB.php",
-            data: { type: "Tab" },
-            success: function(response) {
-                $('#modal-bodyTab').html(response);
-            }
-        });
-        $('#modal-footerTab').html(`
+    $('#navbarDelTab').click(async function(e) {
+
+        var title = 'Delete Tap';
+        var body = null;
+        var footer = `
         <div class="btn-group btn-block">
             <button class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-        `);
-        $("#HomeModalTab").modal();
+        </div>`;
+
+        if (c === 4) {
+            await $.ajax({
+                type: "GET",
+                url: "./ListDB.php",
+                data: { type: "Tab" },
+                success: function(response) {
+                    body = response;
+                }
+            });
+
+            $.post("./modal.php", { title: title, body: body, footer: footer },
+                function(data, textStatus, jqXHR) {
+                    $('#HomeModal').html(data);
+                    $("#HomeModal").modal();
+                    $('#scriptreload').html(`<script type='text/javascript' src="main.js"></script>`);
+                }
+            );
+
+            c = 0;
+        } else {
+            c++;
+        };
+
     });
 
-    $('#listviewTopTabDel').click(function(e) {
-        console.log(e);
+    $('#listviewAllTabDel').click(function(e) {
+        var idDiv = e.currentTarget.parentElement.id;
+        var id = e.currentTarget.value;
+        var vTTab = e.currentTarget.parentElement.attributes[1].value;
+
+        if (c === 4) {
+            $.post("./DelDB.php", { table: "view", id: id },
+                function(data, textStatus, jqXHR) {
+                    $('#' + idDiv).remove();
+
+                    if (vTTab === "TopTab") {
+                        refresh('TopTab');
+                    };
+
+                    if (vTTab === "Tab") {
+                        refresh('Tab');
+                    };
+                }
+            );
+            c = 0;
+        } else {
+            c++;
+        };
     });
 
     /*

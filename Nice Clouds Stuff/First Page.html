@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" id="css_screen" href="Properties.css" media="screen" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/9ab65f7b26.js" crossorigin="anonymous"></script>
+  <title>France Alliance's Website</title>
+  <style media="screen">
+    #footer {
+   position: absolute;
+   bottom: 0;
+}
+  </style>
+</head>
+
+<body>
+    <div class="header p-3" style="color:#EAEAEA">
+      <h1>Header</h1>
+      <p>This header has a dark background color but more ligher than the body and navebar background, with the standart website white text, and some extra padding and margins.</p>
+    </div>
+    <div class="topnav" id="Topnav">
+      <a href="#home" class="active">Home</a>
+      <a href="#joueur">Joueurs</a>
+      <a href="#roles">Rôles</a>
+      <a href="javascript:void(0);" class="icon" onclick="RespTopNav()">
+        <i class="fas fa-bars"></i>
+      </a>
+    </div>
+
+<!--This is to stuck things at the bottom. It's from there and is totally underrated (https://stackoverflow.com/a/46132502/12700252)-->
+    <br>
+    <br>
+    <div id="footer">
+        <a  href="https://icons8.com" style="color:#EAEAEA">Icon pack by Icons8</a>
+    </div>
+
+  </body>
+
+  <script>
+  function RespTopNav() {
+    var x = document.getElementById("Topnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+  }
+  </script>
+</html>

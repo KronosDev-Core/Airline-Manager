@@ -36,6 +36,30 @@ function listTab($conn) {
     echo implode($rdata);
 };
 
+function listTabContent($conn) {
+    $sql="SELECT * FROM rh.view";
+    $data = mysqli_query($conn, $sql);
+    $i = true;
+
+    while($row = mysqli_fetch_array($data)) {
+
+        if ($row['toggledataview'] != null) {
+            if ($i) {
+                echo '
+                <div id="' . $row['toggledataview'] . '"></div>
+                ';
+                $i = false;
+            }; 
+            if ($i === false) {
+                echo '
+                <div id="' . $row['toggledataview'] . '"></div>
+                ';
+                $i++;
+            };
+        };
+    };
+};
+
 if ($_GET['type'] === "TopTab") {
     listTopTab($conn);
 };
@@ -43,5 +67,9 @@ if ($_GET['type'] === "TopTab") {
 if ($_GET['type'] === "Tab") {
     listTab($conn);
 };
+
+if ($_GET['type'] === "TabContent") {
+    listTabContent($conn);
+}
 
 ?>

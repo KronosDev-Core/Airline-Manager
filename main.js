@@ -23,6 +23,17 @@ $(document).ready(function() {
                     $('#scriptreload').html(`<script type='text/javascript' src="main.js"></script>`);
                 }
             });
+
+            $.ajax({
+                type: "GET",
+                url: "./ListDB.php",
+                data: { type: "TabContent" },
+                dataType: "html",
+                success: function(response) {
+                    $('div#viewTab').html(response);
+                    $('#scriptreload').html(`<script type='text/javascript' src="main.js"></script>`);
+                }
+            });
         };
 
         if (data == 'all') {
@@ -42,6 +53,17 @@ $(document).ready(function() {
                 dataType: "html",
                 success: function(response) {
                     $('div#TopTab').html(response);
+                    $('#scriptreload').html(`<script type='text/javascript' src="main.js"></script>`);
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "./ListDB.php",
+                data: { type: "TabContent" },
+                dataType: "html",
+                success: function(response) {
+                    $('div#viewTab').html(response);
                     $('#scriptreload').html(`<script type='text/javascript' src="main.js"></script>`);
                 }
             });
@@ -328,11 +350,35 @@ $(document).ready(function() {
     // Action Click Button Tabs
 
     $('div#TopTab button').click(function(e) {
-        console.log(e.target.previousElementSibling.id);
+        console.log(e.target.id);
     });
 
     $('div#Tab button').click(function(e) {
-        console.log(e.target.previousElementSibling.id);
+        var datatoggle = '#a' + e.target.innerText;
+
+        if (datatoggle === '#aJoueur') {
+            $.ajax({
+                type: "GET",
+                url: "./html/Ajouter/Joueur.php",
+                success: function(response) {
+                    $('#aJoueur').html(response);
+                    $('#scriptreload').html(`<script type='text/javascript' src="main.js"></script>`);
+                }
+            });
+            $('#aAlliance').empty();
+        };
+
+        if (datatoggle === '#aAlliance') {
+            $.ajax({
+                type: "GET",
+                url: "./html/Ajouter/Alliance.php",
+                success: function(response) {
+                    $('#aAlliance').html(response);
+                    $('#scriptreload').html(`<script type='text/javascript' src="main.js"></script>`);
+                }
+            });
+            $('#aJoueur').empty();
+        };
     });
 
     // ADD TABS

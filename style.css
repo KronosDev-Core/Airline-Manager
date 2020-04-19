@@ -13,3 +13,11 @@ nav#navbartop button,
     background-color: transparent;
     color: rgb(173, 173, 173);
 }
+
+#TabContent {
+    height: 100%;
+    width: 60%;
+    left: 20%;
+    right: 20%;
+    position: absolute;
+}

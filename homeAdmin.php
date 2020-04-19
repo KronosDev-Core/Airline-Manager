@@ -37,7 +37,7 @@ if ($conn->connect_error) {
             <img src="./France Alliance icon.jpg" width="30" height="30" class="d-inline-block align-top" alt=""> Airline Manager for RH
         </a>
 
-        <ul class="navbar-nav nav d-inline-flex" aria-expanded="false">
+        <ul class="navbar-nav nav d-inline-flex">
             <li id="listTopTap" class="nav-items dropdown d-flex">
                 <div id="TopTab"></div>
                 <button type="button" class="btn btn-outline-success text-success" id="navbarAddTopTab">+</button>
@@ -47,19 +47,24 @@ if ($conn->connect_error) {
     </nav>
 
     <div id="Dbody">
-        <ul class="nav-tabs nav bg-dark text-grey" id="navTab" aria-expanded="false">
-            <li id="listTap" class="nav-items dropdown d-flex">
-                <div id="Tab" class="d-flex"></div>
-                <button type="button" class="btn btn-outline-success text-success" id="navbarAddTab">+</button>
-                <button type="button" class="btn btn-outline-success text-danger" id="navbarDelTab">-</button>
-            </li>
-        </ul>
-
-        <div class="tab-content">
-            <div class="tab-pane container active" id="ajoueur"></div>
-            <div class="tab-pane container fade" id="arole"></div>
-            <div class="tab-pane container fade" id="aalliance"></div>
+        <div id="collapsedivnav" class="collapse">
+            <ul class="nav-tabs nav bg-dark text-grey" id="navTab">
+                <li id="listTap" class="nav-items dropdown d-flex">
+                    <div id="Tab" class="d-flex"></div>
+                    <button type="button" class="btn btn-outline-success text-success" id="navbarAddTab">+</button>
+                    <button type="button" class="btn btn-outline-success text-danger" id="navbarDelTab">-</button>
+                </li>
+            </ul>
         </div>
+
+        <div id="TabContent">
+            <div id="viewTab"></div>
+            
+            <button type="button" class="btn btn-outline-success text-success" id="navbarAddTab">+</button>
+            <button type="button" class="btn btn-outline-success text-danger" id="navbarDelTab">-</button>
+
+        </div>
+
     </div>
 
     <div class="modal fade" id="HomeModal"></div>
@@ -69,28 +74,6 @@ if ($conn->connect_error) {
     <script type='text/javascript' >
         let i = true;
         var c = 0;
-
-        $.ajax({
-            type: "GET",
-            url: "./html/Ajouter/Joueur.php",
-            success: function(response) {
-                $('#ajoueur').html(response);
-            }
-        });
-        $.ajax({
-            type: "GET",
-            url: "./html/Ajouter/Role.php",
-            success: function(response) {
-                $('#arole').html(response);
-            }
-        });
-        $.ajax({
-            type: "GET",
-            url: "./html/Ajouter/Alliance.php",
-            success: function(response) {
-                $('#aalliance').html(response);
-            }
-        });
     </script>
     <div id="scriptreload">
         <script type='text/javascript' src="main.js"></script>

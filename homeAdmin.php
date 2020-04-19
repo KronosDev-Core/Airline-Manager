@@ -52,16 +52,16 @@ if ($conn->connect_error) {
                 <li id="listTap" class="nav-items dropdown d-flex">
                     <div id="Tab" class="d-flex"></div>
                     <button type="button" class="btn btn-outline-success text-success" id="navbarAddTab">+</button>
-                    <button type="button" class="btn btn-outline-success text-danger" id="navbarDelTab">-</button>
+                    <button type="button" class="btn btn-outline-danger text-danger" id="navbarDelTab">-</button>
                 </li>
             </ul>
         </div>
 
         <div id="TabContent">
             <div id="viewTab"></div>
-            
-            <button type="button" class="btn btn-outline-success text-success" id="navbarAddTab">+</button>
-            <button type="button" class="btn btn-outline-success text-danger" id="navbarDelTab">-</button>
+
+            <button type="button" class="btn btn-outline-success text-success" id="contentAddTab">+</button>
+            <button type="button" class="btn btn-outline-danger text-danger" id="contentDelTab">-</button>
 
         </div>
 

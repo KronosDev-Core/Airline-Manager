@@ -357,6 +357,8 @@ $(document).ready(function() {
         var datatoggle = '#a' + e.target.innerText;
 
         if (datatoggle === '#aJoueur') {
+            $('#aAlliance').empty();
+
             $.ajax({
                 type: "GET",
                 url: "./html/Ajouter/Joueur.php",
@@ -365,10 +367,11 @@ $(document).ready(function() {
                     $('#scriptreload').html(`<script type='text/javascript' src="main.js"></script>`);
                 }
             });
-            $('#aAlliance').empty();
         };
 
         if (datatoggle === '#aAlliance') {
+            $('#aJoueur').empty();
+
             $.ajax({
                 type: "GET",
                 url: "./html/Ajouter/Alliance.php",
@@ -377,7 +380,6 @@ $(document).ready(function() {
                     $('#scriptreload').html(`<script type='text/javascript' src="main.js"></script>`);
                 }
             });
-            $('#aJoueur').empty();
         };
     });
 

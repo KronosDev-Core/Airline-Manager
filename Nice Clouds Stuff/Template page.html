@@ -8,42 +8,28 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/9ab65f7b26.js" crossorigin="anonymous"></script>
   <title>France Alliance's Website</title>
-  <script>
-  function RespTopNav() {
-    var x = document.getElementById("Topnav");
-    if (x.className === "topnav") {
-      x.className += ".responsive";
-    } else {
-      x.className = "topnav";
-    }
-  }
-  </script>
-<!--  <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer>
-    const crate = new Crate({
-      server: '678715759391670283',
-      channel: '678715759811231768'
-      })
-
-    crate.notify('Welcome back !')
-  </script>-->
+  <style media="screen">
+    #footer {
+   position: absolute;
+   bottom: 0;
+}
+  </style>
 </head>
 
 <body>
-    <div class="header" style="color:#EAEAEA">
+    <div class="header p-3" style="color:#EAEAEA">
       <h1>Header</h1>
       <p>This header has a dark background color but more ligher than the body and navebar background, with the standart website white text, and some extra padding and margins.</p>
     </div>
     <div class="topnav" id="Topnav">
       <a href="#home" class="active">Home</a>
-      <a href="#joueurs">Joueurs</a>
-      <a href="#roles">Rôles</a>
+      <a href="#tab1">tab1</a>
       <a href="javascript:void(0);" class="icon" onclick="RespTopNav()">
         <i class="fas fa-bars"></i>
       </a>
     </div>
 
-<iframe src="https://discordapp.com/widget?id=678715759391670283&theme=dark" width="350" allowtransparency="true" frameborder="0" style="position: absolute; height: 75%;"></iframe>
-<!--<iframe src="https://e.widgetbot.io/channels/678715759391670283/678715759811231768" height="600" width="800"></iframe>-->
+    
 
 
 <!--This is to stuck things at the bottom. It's from Stackoverflow there and is totally underrated (https://stackoverflow.com/a/46132502/12700252)-->
@@ -55,5 +41,14 @@
 
   </body>
 
-
+  <script>
+  function RespTopNav() {
+    var x = document.getElementById("Topnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+  }
+  </script>
 </html>

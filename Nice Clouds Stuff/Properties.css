@@ -118,3 +118,16 @@ h5 {
 .icon { /* Customizes all icons at once */
   display: inline-block;
 }
+
+div#neumo {
+  border-radius: 10px;
+  background: #303030;
+  box-shadow:  20px 20px 60px #292929, -20px -20px 60px #373737;
+  height: 100px;
+  width: 200px;
+	}
+
+div#footer {
+ position: absolute;
+ bottom: 0;
+}

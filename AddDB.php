@@ -46,7 +46,7 @@ function addtab($conn) {
     $where = mysqli_escape_string($conn, $_POST['where']);
     $data = mysqli_escape_string($conn, $_POST['data']);
     $id = mysqli_escape_string($conn, $_POST['id']);
-    $toggle = '#a' . $data;
+    $toggle = 'a' . $data;
 
     $sql = "INSERT INTO rh.view (whereview, idelementview, dataview, toggledataview) VALUES ('" . $where ."', '" . $id ."', '" . $data ."', '" . $toggle ."')";
     

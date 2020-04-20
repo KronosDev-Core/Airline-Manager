@@ -57,5 +57,4 @@ $data = mysqli_query($conn, $sql);
 
     <button class="btn btn-success btn-block" id="submitAddAlliance">Enregistrer</button>
 </div>
-<script src="main.js"></script>
 <?php $conn->close(); ?>

@@ -60,5 +60,4 @@ $data = mysqli_query($conn, $sql);
     </div>
     <button class="btn btn-success btn-block" id="submitAddJoueur">Enregistrer</button>
 </div>
-<script src="main.js"></script>
 <?php $conn->close(); ?>

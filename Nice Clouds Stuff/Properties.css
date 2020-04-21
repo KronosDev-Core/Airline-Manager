@@ -55,6 +55,7 @@ h5 {
   background-color: #444444;
   padding: 20px;
   text-align: left;
+  position: relative
 }
 
 /* The navbar container */

@@ -18,20 +18,34 @@
     }
   }
   </script>
-<!--  <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer>
+  <script>
+  function fitText() {
+      window.fitText(document.getElementById("responsive"));
+      x = 0;
+      console.log(X);
+      X += 1;
+  }
+
+  </script>
+<!--
+  <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer>
     const crate = new Crate({
       server: '678715759391670283',
       channel: '678715759811231768'
       })
 
     crate.notify('Welcome back !')
-  </script>-->
+  </script>
+-->
+
 </head>
 
 <body>
-    <div class="header" style="color:#EAEAEA">
-      <h1>Header</h1>
+    <div class="header" id="responsive" style="color:#EAEAEA;">
+      <h1><img src="Corpo.png" alt="Logo of France Alliance Corporation" width="268" height="112.7" style="vertical-align:middle">  Header</h1>
       <p>This header has a dark background color but more ligher than the body and navebar background, with the standart website white text, and some extra padding and margins.</p>
+
+
     </div>
     <div class="topnav" id="Topnav">
       <a href="#home" class="active">Home</a>
@@ -42,7 +56,7 @@
       </a>
     </div>
 
-<iframe src="https://discordapp.com/widget?id=678715759391670283&theme=dark" width="350" allowtransparency="true" frameborder="0" style="position: absolute; height: 75%;"></iframe>
+<iframe src="https://discordapp.com/widget?id=678715759391670283&theme=dark" width="350" allowtransparency="true" frameborder="0" style="position: absolute; right: 10px; height: 75%;"></iframe>
 <!--<iframe src="https://e.widgetbot.io/channels/678715759391670283/678715759811231768" height="600" width="800"></iframe>-->
 
 

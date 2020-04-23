@@ -59,10 +59,18 @@ if ($conn->connect_error) {
 
         <div id="TabContent">
             <div id="viewTab"></div>
+            <div class="input-group mb-3">
 
-            <button type="button" class="btn btn-outline-success text-success" id="contentAddTab">+</button>
-            <button type="button" class="btn btn-outline-danger text-danger" id="contentDelTab">-</button>
-
+                <select id="Addviewcontenttab"class="custom-select"></select>
+                <div class="input-group-append">
+                    <button id="Addbtncontenttab" class="btn btn-outline-success text-success">Save</button>
+                </div>
+                
+                <select id="Delviewcontenttab" class="custom-select"></select>
+                <div class="input-group-append">
+                    <button id="Delbtncontenttab" class="btn btn-outline-danger text-danger">Delete</button>
+                </div>
+            </div>
         </div>
 
     </div>

@@ -590,31 +590,4 @@ $(document).ready(function() {
         };
     });
 
-    /*
-    $("button['' = '']").click(function(e) {
-        e.preventDefault();
-
-    });
-
-            var nameA = $("input#namealliance").val();
-            var linkA = $("input#linkalliance").val();
-            var corporationA = $("#listCorporation").val();
-            var pdgA = $("#listPlayerpdg").val();
-
-            var url = "./AddDB.php";
-            if (nameA != "" || null && linkA != "" || null && corporationA != "" || null && pdgA != "" || null) {
-                console.log('is not null');
-                $.post(url, { name: nameA, link: linkA, corporation: corporationA, pdg: pdgA, type: "alliance" },
-                    function(data, textStatus, jqXHR) {
-                        alert("Data: " + data + "\nStatus: " + status + "\nXHR: " + jqXHR);
-                    },
-                );
-                $("input#namealliance").val(null);
-                $("input#linkalliance").val(null);
-                $("#listCorporation").val(null);
-                $("#listPlayerpdg").val(null);
-            } else {
-                console.log('is null');
-            }
-    */
 });

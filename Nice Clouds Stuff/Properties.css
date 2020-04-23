@@ -1,4 +1,9 @@
 /* Default settings */
+* {
+margin: 0;
+padding: 0;
+}
+
 body {
     background-color: #303030;
     color: #EAEAEA;
@@ -64,6 +69,9 @@ h5 {
 .tab {
   overflow: hidden;
   background-color: #444444;
+  color: #EAEAEA;
+  font-family: Nunito, sans-serif;
+
 }
 
 /* Style the buttons inside the tab */
@@ -80,12 +88,12 @@ h5 {
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #ddd;
+  background-color: #D37243;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-  background-color: #ccc;
+  background-color: #D34343;
 }
 
 /* Style the tab content */
@@ -93,15 +101,6 @@ h5 {
   display: none;
   padding: 6px 12px;
 }
-
-/* Style of the tablinks class */
-tablinks {
-    background-color: #303030;
-    color: #EAEAEA;
-    font-family: Nunito, sans-serif;
-    font-size: 1em;
-}
-
 
 div#footer {
  position: absolute;

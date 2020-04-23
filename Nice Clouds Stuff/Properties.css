@@ -1,6 +1,7 @@
 /* Default settings */
 body {
     background-color: #303030;
+    color: #EAEAEA;
     font-family: Nunito, sans-serif;
     font-size: 1em;
 }
@@ -12,7 +13,7 @@ h1 {
     border: solid 0 transparent;
     color: #EAEAEA;
     font-family: Montserrat, sans-serif;
-    font-size: 2,5em;
+    font-size: 4em;
 }
 
 /* Style the title of importance 2 */
@@ -58,75 +59,49 @@ h5 {
   position: relative
 }
 
-/* The navbar container */
-.topnav {
+
+/* Style the tab */
+.tab {
   overflow: hidden;
-  background-color: #333333;
-}
-
-/* Navbar links */
-.topnav a {
-  float: left;
-  display: block;
-  color: #EAEAEA;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-/* Links - change color on hover */
-.topnav a:hover {
   background-color: #444444;
-  color: #EAEAEA;
 }
 
-.topnav a.active {
-  background-color: #ff5050;
-  color: white;
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
 }
 
-.topnav .icon {
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
   display: none;
+  padding: 6px 12px;
 }
 
-@media screen and (max-width: 600px) {
-  .topnav a:not(:first-child) {display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
+/* Style of the tablinks class */
+tablinks {
+    background-color: #303030;
+    color: #EAEAEA;
+    font-family: Nunito, sans-serif;
+    font-size: 1em;
 }
 
-@media screen and (max-width: 600px) {
-  .topnav.responsive {position: relative;}
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-}
-
-/*Menu icon by Icons8 */
-.icon-Menu { /* Customizes Menu icon */
-  width: 64px;
-  height: 64px;
-}
-.icon { /* Customizes all icons at once */
-  display: inline-block;
-}
-
-div#neumo {
-  border-radius: 10px;
-  background: #303030;
-  box-shadow:  20px 20px 60px #292929, -20px -20px 60px #373737;
-  height: 100px;
-  width: 200px;
-	}
 
 div#footer {
  position: absolute;

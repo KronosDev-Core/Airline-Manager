@@ -18,7 +18,7 @@ h1 {
     border: solid 0 transparent;
     color: #EAEAEA;
     font-family: Montserrat, sans-serif;
-    font-size: 4em;
+    font-size: 2.75em;
 }
 
 /* Style the title of importance 2 */
@@ -59,7 +59,7 @@ h5 {
 /* Style the header */
 .header {
   background-color: #444444;
-  padding: 20px;
+  padding: 10px;
   text-align: left;
   position: relative
 }

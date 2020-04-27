@@ -13,64 +13,37 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/0ad5449ac0.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-<?php 
-require 'maindb.php';
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark text-grey fixed-top" id="navbartop">
+        <div>
+            <img class="navbar-brand" src="./AM2_France_Alliance_corpo_V2.2.png">
 
-$username = 'Program';
-$servername = "localhost";
-$password = "HelloWords42";
-$port = 27017;
+            <div class="navbar-nav" id="TopTab"></div>
 
-$conn = new mysqli($servername, $username, $password, '', $port);
-$db   = mysqli_select_db($conn, "rh");
+            <div id="btnAdminViewTopTab">
+                <button type="button" class="btn btn-outline-success text-success navbar-toggler" id="navbarAddTopTab">+</button>
+                <button type="button" class="btn btn-outline-danger text-danger navbar-toggler" id="navbarDelTopTab">-</button>
+                <button type="button" class="btn btn-outline-secondary text-muted navbar-toggler" id="navbarOpt"><i class="fas fa-cog"></i></button>
+            </div>
+        </div>
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-};
-?>
+        <div id="collapsenav" class="collapse navbar-dark bg-dark text-grey">
+            <div id="Tab"></div>
 
-    <nav class="navbar navbar-expand navbar-dark bg-dark nav-justified" id="navbartop">
-        <a class="navbar-brand">
-            <img src="./France Alliance icon.jpg" width="30" height="30" class="d-inline-block align-top" alt=""> Airline Manager for RH
-        </a>
-
-        <ul class="navbar-nav nav d-inline-flex">
-            <li id="listTopTap" class="nav-items dropdown d-flex">
-                <div id="TopTab"></div>
-                <button type="button" class="btn btn-outline-success text-success" id="navbarAddTopTab">+</button>
-                <button type="button" class="Del btn btn-outline-danger text-danger" id="navbarDelTopTab">-</button>
-            </li>
-        </ul>
+            <div id="btnAdminViewTab">
+                <button type="button" class="btn btn-outline-success text-success" id="navbarAddTab">+</button>
+                <button type="button" class="btn btn-outline-danger text-danger" id="navbarDelTab">-</button>
+            </div>
+        </div>
     </nav>
 
     <div id="Dbody">
-        <div id="collapsedivnav" class="collapse">
-            <ul class="nav-tabs nav bg-dark text-grey" id="navTab">
-                <li id="listTap" class="nav-items dropdown d-flex">
-                    <div id="Tab" class="d-flex"></div>
-                    <button type="button" class="btn btn-outline-success text-success" id="navbarAddTab">+</button>
-                    <button type="button" class="btn btn-outline-danger text-danger" id="navbarDelTab">-</button>
-                </li>
-            </ul>
-        </div>
 
         <div id="TabContent">
-            <div id="viewTab"></div>
-            <div class="input-group mb-3">
-
-                <select id="Addviewcontenttab"class="custom-select"></select>
-                <div class="input-group-append">
-                    <button id="Addbtncontenttab" class="btn btn-outline-success text-success">Save</button>
-                </div>
-                
-                <select id="Delviewcontenttab" class="custom-select"></select>
-                <div class="input-group-append">
-                    <button id="Delbtncontenttab" class="btn btn-outline-danger text-danger">Delete</button>
-                </div>
-            </div>
+            <div style="margin-top: 100px;" id="viewTab"></div>
         </div>
 
     </div>
@@ -81,7 +54,7 @@ if ($conn->connect_error) {
 
     <script type='text/javascript' >
         let i = true;
-        var c = 0;
+        let c = 0;
     </script>
     <div id="scriptreload">
         <script type='text/javascript' src="main.js"></script>

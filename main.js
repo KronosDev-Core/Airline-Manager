@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    let oldTabActive = null;
 
     function refresh(data) {
         if (data == 'TopTab') {
@@ -31,6 +32,30 @@ $(document).ready(function() {
                 dataType: "html",
                 success: function(response) {
                     $('div#viewTab').html(response);
+                    $('#scriptreload').html(`<script type='text/javascript' src="main.js"></script>`);
+                }
+            });
+        };
+
+        if (data == 'Body') {
+            $.ajax({
+                type: "GET",
+                url: "./ListDB.php",
+                data: { type: "ViewAddElement" },
+                dataType: "html",
+                success: function(response) {
+                    $('select#Addviewcontenttab').html(response);
+                    $('#scriptreload').html(`<script type='text/javascript' src="main.js"></script>`);
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "./ListDB.php",
+                data: { type: "viewDelElement" },
+                dataType: "html",
+                success: function(response) {
+                    $('select#Delviewcontenttab').html(response);
                     $('#scriptreload').html(`<script type='text/javascript' src="main.js"></script>`);
                 }
             });
@@ -195,197 +220,222 @@ $(document).ready(function() {
 
         })
     };
+    /*
+        $('#navbarAjouter').click(function(e) {
+            e.preventDefault(e);
 
-    $('#navbarAjouter').click(function(e) {
-        e.preventDefault(e);
-
-        tabscontrol("Add");
-    });
-
-    $('#navbarListe').click(function(e) {
-        e.preventDefault(e);
-
-        tabscontrol("List");
-    });
-
-    $('#navbarStat').click(function(e) {
-        e.preventDefault(e);
-
-        tabscontrol("Stat");
-    });
-
-    $('button#submitAddJoueur').click(function(e) {
-        console.log(e, "test click");
-
-        var name = $("input#name").val();
-        var link = $("input#link").val();
-        var alliance = $("#listAlliance").val();
-        var role = $("#listRole").val();
-        var entretien = $("#entretien").val();
-        var candidature = $("#candidature").val();
-
-        var url = "./AddDB.php";
-        if (name != "" || null && link != "" || null && alliance != "" || null && role != "" || null && entretien != "" || null && candidature != "" && null) {
-            console.log('is not null');
-            $.post(url, { name: name, link: link, alliance: alliance, role: role, candidature: candidature, entretien: entretien, type: "joueur" },
-                function(data, textStatus, jqXHR) {
-                    alert("Data: " + data + "\nStatus: " + status + "\nXHR: " + jqXHR);
-                },
-            );
-            $("input#name").val(null);
-            $("input#link").val(null);
-            $("#listAlliance").val(null);
-            $("#listRole").val(null);
-            $("#entretien").val(null);
-            $("#candidature").val(null);
-        } else {
-            console.log('is null');
-        }
-    });
-
-    $("div#btnListExpandView button").click(function(e) {
-        var IdPlayerView = e.target.value;
-
-        $.ajax({
-            type: "POST",
-            url: "./html/Liste/View/Joueur.php",
-            data: { id: IdPlayerView },
-            success: function(response) {
-                $('#ajoueur').html(response);
-            }
+            tabscontrol("Add");
         });
-    });
 
-    $("#gotoEditPlayer").click(function(e) {
-        var PlayerIdView = $("#IdPlayerView").attr("value");
+        $('#navbarListe').click(function(e) {
+            e.preventDefault(e);
 
-        $.ajax({
-            type: "POST",
-            url: "./html/Modifier/Joueur.php",
-            data: { id: PlayerIdView },
-            success: function(response) {
-                console.log(response);
-                $('#ajoueur').html(response);
+            tabscontrol("List");
+        });
+
+        $('#navbarStat').click(function(e) {
+            e.preventDefault(e);
+
+            tabscontrol("Stat");
+        });
+
+        $('button#submitAddJoueur').click(function(e) {
+            console.log(e, "test click");
+
+            var name = $("input#name").val();
+            var link = $("input#link").val();
+            var alliance = $("#listAlliance").val();
+            var role = $("#listRole").val();
+            var entretien = $("#entretien").val();
+            var candidature = $("#candidature").val();
+
+            var url = "./AddDB.php";
+            if (name != "" || null && link != "" || null && alliance != "" || null && role != "" || null && entretien != "" || null && candidature != "" && null) {
+                console.log('is not null');
+                $.post(url, { name: name, link: link, alliance: alliance, role: role, candidature: candidature, entretien: entretien, type: "joueur" },
+                    function(data, textStatus, jqXHR) {
+                        alert("Data: " + data + "\nStatus: " + status + "\nXHR: " + jqXHR);
+                    },
+                );
+                $("input#name").val(null);
+                $("input#link").val(null);
+                $("#listAlliance").val(null);
+                $("#listRole").val(null);
+                $("#entretien").val(null);
+                $("#candidature").val(null);
+            } else {
+                console.log('is null');
             }
         });
 
-        console.log(PlayerIdView);
-    });
+        $("div#btnListExpandView button").click(function(e) {
+            var IdPlayerView = e.target.value;
 
-    $("#gotoListPlayer").click(function(e) {
-        $.ajax({
-            type: "GET",
-            url: "./html/Liste/Joueur.php",
-            dataType: "html",
-            success: function(response) {
-                $('#ajoueur').html(response);
+            $.ajax({
+                type: "POST",
+                url: "./html/Liste/View/Joueur.php",
+                data: { id: IdPlayerView },
+                success: function(response) {
+                    $('#ajoueur').html(response);
+                }
+            });
+        });
+
+        $("#gotoEditPlayer").click(function(e) {
+            var PlayerIdView = $("#IdPlayerView").attr("value");
+
+            $.ajax({
+                type: "POST",
+                url: "./html/Modifier/Joueur.php",
+                data: { id: PlayerIdView },
+                success: function(response) {
+                    console.log(response);
+                    $('#ajoueur').html(response);
+                }
+            });
+
+            console.log(PlayerIdView);
+        });
+
+        $("#gotoListPlayer").click(function(e) {
+            $.ajax({
+                type: "GET",
+                url: "./html/Liste/Joueur.php",
+                dataType: "html",
+                success: function(response) {
+                    $('#ajoueur').html(response);
+                }
+            });
+        });
+
+        $("div#DAddAlliance button").click(function(e) {
+            console.log(e, "test click");
+
+            var nameA = $("input#namealliance").val();
+            var linkA = $("input#linkalliance").val();
+            var corporationA = $("#listCorporation").val();
+            var pdgA = $("#listPlayerpdg").val();
+
+            var url = "./AddDB.php";
+            if (nameA != "" || null && linkA != "" || null && corporationA != "" || null && pdgA != "" || null) {
+                console.log('is not null');
+                $.post(url, { name: nameA, link: linkA, corporation: corporationA, pdg: pdgA, type: "alliance" },
+                    function(data, textStatus, jqXHR) {
+                        alert("Data: " + data + "\nStatus: " + status + "\nXHR: " + jqXHR);
+                    },
+                );
+                $("input#namealliance").val(null);
+                $("input#linkalliance").val(null);
+                $("#listCorporation").val(null);
+                $("#listPlayerpdg").val(null);
+            } else {
+                console.log('is null');
             }
         });
-    });
 
-    $("div#DAddAlliance button").click(function(e) {
-        console.log(e, "test click");
+        $("div#btnListExpandViewA button").click(function(e) {
+            var IdAllianceView = e.target.value;
 
-        var nameA = $("input#namealliance").val();
-        var linkA = $("input#linkalliance").val();
-        var corporationA = $("#listCorporation").val();
-        var pdgA = $("#listPlayerpdg").val();
-
-        var url = "./AddDB.php";
-        if (nameA != "" || null && linkA != "" || null && corporationA != "" || null && pdgA != "" || null) {
-            console.log('is not null');
-            $.post(url, { name: nameA, link: linkA, corporation: corporationA, pdg: pdgA, type: "alliance" },
-                function(data, textStatus, jqXHR) {
-                    alert("Data: " + data + "\nStatus: " + status + "\nXHR: " + jqXHR);
-                },
-            );
-            $("input#namealliance").val(null);
-            $("input#linkalliance").val(null);
-            $("#listCorporation").val(null);
-            $("#listPlayerpdg").val(null);
-        } else {
-            console.log('is null');
-        }
-    });
-
-    $("div#btnListExpandViewA button").click(function(e) {
-        var IdAllianceView = e.target.value;
-
-        $.ajax({
-            type: "POST",
-            url: "./html/Liste/View/Alliance.php",
-            data: { id: IdAllianceView },
-            success: function(response) {
-                $('#aalliance').html(response);
-            }
+            $.ajax({
+                type: "POST",
+                url: "./html/Liste/View/Alliance.php",
+                data: { id: IdAllianceView },
+                success: function(response) {
+                    $('#aalliance').html(response);
+                }
+            });
         });
-    });
 
-    $("#gotoEditAlliance").click(function(e) {
-        var AllianceIdView = $("#IdAllianceView").attr("value");
+        $("#gotoEditAlliance").click(function(e) {
+            var AllianceIdView = $("#IdAllianceView").attr("value");
 
-        console.log(AllianceIdView);
+            console.log(AllianceIdView);
 
-        $.ajax({
-            type: "POST",
-            url: "./html/Modifier/Alliance.php",
-            data: { id: AllianceIdView },
-            success: function(response) {
-                $('#aalliance').html(response);
-            }
+            $.ajax({
+                type: "POST",
+                url: "./html/Modifier/Alliance.php",
+                data: { id: AllianceIdView },
+                success: function(response) {
+                    $('#aalliance').html(response);
+                }
+            });
         });
-    });
 
-    $("#gotoListAlliance").click(function(e) {
-        $.ajax({
-            type: "GET",
-            url: "./html/Liste/Alliance.php",
-            dataType: "html",
-            success: function(response) {
-                $('#aalliance').html(response);
-            }
-        });
-    });
+        $("#gotoListAlliance").click(function(e) {
+            $.ajax({
+                type: "GET",
+                url: "./html/Liste/Alliance.php",
+                dataType: "html",
+                success: function(response) {
+                    $('#aalliance').html(response);
+                }
+            });
+        }); */
 
     // Action Click Button Tabs
 
     $('div#TopTab button').click(function(e) {
-        console.log(e.target.id);
+        var target = e.currentTarget.dataset.target;
+
+        $(target).collapse('toggle');
     });
 
-    $('div#Tab button').click(function(e) {
-        var datatoggle = '#a' + e.target.innerText;
+    $('div#Tab button').click(async function(e) {
+        var datatoggle = 'a' + e.target.innerText;
 
-        if (datatoggle === '#aJoueur') {
-            $('#aAlliance').empty();
-
-            $.ajax({
+        if (c === 2) {
+            await $.ajax({
                 type: "GET",
-                url: "./html/Ajouter/Joueur.php",
+                url: "./ListDB.php",
+                data: { type: "BodyView" },
                 success: function(response) {
-                    $('#aJoueur').html(response);
-                    $('#scriptreload').html(`<script type='text/javascript' src="main.js"></script>`);
+                    $.post("./body.php", { data: response },
+                        function(data, textStatus, jqXHR) {
+                            $(oldTabActive).remove();
+                            oldTabActive = '#' + datatoggle;
+                            $(oldTabActive).html(data);
+                            refresh('Body');
+                        }
+                    );
                 }
             });
+
+            c = 0;
+        } else {
+            c++;
         };
+    });
 
-        if (datatoggle === '#aAlliance') {
-            $('#aJoueur').empty();
+    $('#navbarOpt').click(async function(e) {
 
-            $.ajax({
+        if (c === 2) {
+            await $.ajax({
                 type: "GET",
-                url: "./html/Ajouter/Alliance.php",
-                success: function(response) {
-                    $('#aAlliance').html(response);
-                    $('#scriptreload').html(`<script type='text/javascript' src="main.js"></script>`);
+                url: "./Option.php",
+                dataType: "html",
+                success: function(data, textStatus, jqXHR) {
+                    if (oldTabActive != null) {
+                        $(oldTabActive).remove();
+                        oldTabActive = '#aOption';
+                        $(oldTabActive).html(data);
+                        refresh('Body');
+                    } else {
+                        oldTabActive = '#aOption';
+                        $(oldTabActive).html(data);
+                        refresh('Body');
+                    };
                 }
             });
+
+            c = 0;
+        } else {
+            c++;
         };
     });
 
     // ADD TABS
 
-    $("button#navbarAddTopTab").click(async function(r) {
+    $("button#navbarAddTopTab").click(function(r) {
 
         var title = 'Create new TopTab';
         var body = `
@@ -409,7 +459,7 @@ $(document).ready(function() {
             <button class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>`;
 
-        await $.post("./modal.php", { title: title, body: body, footer: footer },
+        $.post("./modal.php", { title: title, body: body, footer: footer },
             function(data, textStatus, jqXHR) {
                 $('#HomeModal').html(data);
                 $("#HomeModal").modal();
@@ -441,7 +491,7 @@ $(document).ready(function() {
         }
     });
 
-    $('button#navbarAddTab').click(async function(e) {
+    $('button#navbarAddTab').click(function(e) {
 
         var title = 'Create new Tab';
         var body = `
@@ -465,7 +515,7 @@ $(document).ready(function() {
             <button class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>`;
 
-        await $.post("./modal.php", { title: title, body: body, footer: footer },
+        $.post("./modal.php", { title: title, body: body, footer: footer },
             function(data, textStatus, jqXHR) {
                 $('#HomeModal').html(data);
                 $("#HomeModal").modal();
@@ -480,12 +530,10 @@ $(document).ready(function() {
         var idT = $('div#HomeModal input#id').val();
 
         if (dataT != "" || null || undefined && idT != "" || null || undefined) {
-            //Tab
             var url = './AddDB.php';
 
             $.post(url, { where: 'Tab', data: dataT, id: idT, type: "Tab" },
                 function(data, textStatus, jqXHR) {
-                    //alert("Data: " + data + "\nStatus: " + status + "\nXHR: " + jqXHR);
 
                     if (data == 'Success') {
                         refresh('Tab');
@@ -508,7 +556,7 @@ $(document).ready(function() {
             <button class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>`;
 
-        if (c === 4) {
+        if (c === 2) {
             await $.ajax({
                 type: "GET",
                 url: "./ListDB.php",
@@ -518,7 +566,7 @@ $(document).ready(function() {
                 }
             });
 
-            await $.post("./modal.php", { title: title, body: body, footer: footer },
+            $.post("./modal.php", { title: title, body: body, footer: footer },
                 function(data, textStatus, jqXHR) {
                     $('#HomeModal').html(data);
                     $("#HomeModal").modal();
@@ -540,7 +588,7 @@ $(document).ready(function() {
             <button class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>`;
 
-        if (c === 4) {
+        if (c === 2) {
             await $.ajax({
                 type: "GET",
                 url: "./ListDB.php",
@@ -565,29 +613,24 @@ $(document).ready(function() {
 
     });
 
-    $('#listviewAllTabDel').click(function(e) {
+    $('div#modal-body button').click(function(e) {
         var idDiv = e.currentTarget.parentElement.id;
         var id = e.currentTarget.value;
         var vTTab = e.currentTarget.parentElement.attributes[1].value;
 
-        if (c === 4) {
-            $.post("./DelDB.php", { table: "view", id: id },
-                function(data, textStatus, jqXHR) {
-                    $('#' + idDiv).remove();
+        $.post("./DelDB.php", { table: "view", id: id },
+            function(data, textStatus, jqXHR) {
+                $('#' + idDiv).remove();
 
-                    if (vTTab === "TopTab") {
-                        refresh('TopTab');
-                    };
+                if (vTTab === "TopTab") {
+                    refresh('TopTab');
+                };
 
-                    if (vTTab === "Tab") {
-                        refresh('Tab');
-                    };
-                }
-            );
-            c = 0;
-        } else {
-            c++;
-        };
+                if (vTTab === "Tab") {
+                    refresh('Tab');
+                };
+            }
+        );
     });
 
 });

@@ -54,7 +54,11 @@ function addtab($conn) {
         echo "Error: " . $sql . "<br>" . $conn->error;
     } else { echo 'Success'; };
 };
+/*
+function addtable($conn) {
 
+};
+*/
 if ($_POST['type'] === "joueur") {
     addplayer($conn);
 };
@@ -70,11 +74,9 @@ if ($_POST['type'] === "TopTab") {
 if ($_POST['type'] === "Tab") {
     addtab($conn);
 };
-
 /*
-if ($_POST['type'] === "Role") {
-    //addrole($conn);
+if ($_POST['type'] === "table") {
+    addtable($conn);
 };
 */
-$conn->close();
 ?>

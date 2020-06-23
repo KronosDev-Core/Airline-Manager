@@ -8,7 +8,7 @@ $dataTT = mysqli_query($conn, $sqlTT);
 
 while($rowTT = mysqli_fetch_array($dataTT)) {
     echo '
-    <button data-target="#collapsenav" type="button" class="btn btn-outline-dark" id="' . $rowTT['idelementview'] . '">' . $rowTT['dataview'] . ' </button>
+    <button data-toggle="collapse" data-target="#collapsenav" type="button" class="btn btn-outline-dark navbar-toggler" id="' . $rowTT['idelementview'] . '">' . $rowTT['dataview'] . ' </button>
     ';
 };
 ?>

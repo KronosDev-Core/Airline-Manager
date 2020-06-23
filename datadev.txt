@@ -141,3 +141,17 @@
     $conn->close();
     
     ?>
+
+
+######## Style.css ########
+    
+
+
+.option {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 10%;
+    right: 0;
+    width: 100%;
+}

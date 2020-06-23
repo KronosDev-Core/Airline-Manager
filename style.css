@@ -4,33 +4,61 @@
 }
 
 body {
-    position: fixed;
+    overflow: hidden;
+}
+
+nav#TopTabDiv {
+    height: 5% !important;
+    padding: 0;
 }
 
 nav#navbartop button,
-nav#collapsenav button {
+div#collapsenav button {
     border: 0;
     background-color: transparent;
     color: rgb(173, 173, 173);
     white-space: nowrap;
     display: inline-block;
+    padding: auto;
 }
 
-.tabs {
-    height: 100%;
-    width: 60%;
-    left: 20%;
-    right: 20%;
-    position: absolute;
+div#imgLogo,
+div#btnAdminViewTopTab,
+div#btnAdminViewTab {
+    max-width: 10% !important;
+    margin: auto;
+    margin-right: 0;
 }
 
-.option {
+div#TopTab {
+    max-width: 80%;
+    overflow-x: auto;
+    margin: auto;
+}
+
+div#collaspenav {
+    max-width: 90%;
+    overflow-x: auto;
+    margin: auto;
+}
+
+div#modal-body button {
+    overflow-x: auto;
+}
+
+div#aOption {
     position: absolute;
-    height: 100%;
     left: 0;
-    top: 10%;
     right: 0;
-    width: 100%;
+    bottom: 0;
+}
+
+div#navleft {
+    width: 25%;
+    height: 100%;
+    background-color: grey;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 ::-webkit-scrollbar-track {

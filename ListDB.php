@@ -2,6 +2,23 @@
 
 require 'maindb.php';
 
+function listTopTap($conn) {
+    $sql="SELECT * FROM rh.view WHERE whereview='TopTab'";
+    $data = mysqli_query($conn, $sql);
+    $rdata = [];
+
+    while($row = mysqli_fetch_array($data)) {
+        array_push($rdata, '
+        <div id="' . $row['idview'] . '" value="Tab" class="btn-group btn-block">
+            <button value="' . $row['idview'] . '" type="button" class="Del btn btn-outline-danger text-danger" id="listviewAllTabDel">-</button>
+            <button id="listviewTopTab" value="' . $row['idview'] . '" class="list-group-item list-group-item-action">' . $row['dataview'] . '</button>
+        </div>
+        ');
+    };
+
+    echo implode($rdata);
+};
+
 function listTab($conn) {
     $sql="SELECT * FROM rh.view WHERE whereview='Tab'";
     $data = mysqli_query($conn, $sql);
@@ -30,22 +47,18 @@ function listTabContent($conn) {
         if ($row['toggledataview'] != null) {
             if ($i) {
                 array_push($rdata, '
-                <div class="tabs" id="' . $row['toggledataview'] . '"></div>
+                <div class="tabs m-1" id="' . $row['toggledataview'] . '"></div>
                 ');
                 $i = false;
             }; 
             if ($i === false) {
                 array_push($rdata, '
-                <div class="tabs" id="' . $row['toggledataview'] . '"></div>
+                <div class="tabs m-1" id="' . $row['toggledataview'] . '"></div>
                 ');
                 $i++;
             };
         };
     };
-
-    array_push($rdata, '
-    <div class="option" id="aOption"></div>
-    ');
 
     echo implode($rdata);
 };
@@ -84,12 +97,16 @@ function listbodyview($conn) {
     $rdata = [];
 
     while ($row = mysqli_fetch_array($data)) {
-        if ($row['toggledataview'] === $_POST['toggledataview']) {
+        if ($row['toggledataview'] === $_GET['toggledataview']) {
             array_push($rdata, $row['dataview']);
         };
     };
 
     echo implode($rdata);
+};
+
+if ($_GET['type'] === "TopTab") {
+    listTopTap($conn);
 };
 
 if ($_GET['type'] === "Tab") {
